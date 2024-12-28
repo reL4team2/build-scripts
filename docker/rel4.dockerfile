@@ -84,11 +84,11 @@ RUN set -eux; \
 
 RUN set -eux; \
     git clone \
-        https://github.com/rel4team/mi-dev-integral-rel4.git rel4_kernel -b microkit \
+        https://github.com/reL4team2/rel4-integral.git rel4_kernel -b microkit \
         --config advice.detachedHead=false;
 RUN set -eux; \
     git clone \
-        https://github.com/rel4team/seL4_c_impl.git \
+        https://github.com/reL4team2/seL4_c_impl.git \
         --config advice.detachedHead=false -b microkit;
     
 COPY kernel-settings-aarch64.cmake .

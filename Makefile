@@ -31,7 +31,7 @@ root-task:
 	# done
 	# docker run -it --name rust-root-task-demo \
 	# 	--mount type=bind,src=$(abspath ../),dst=/work \
-	# 	rust-root-task-demo bash /work/build-scripts/mi-dev-build.sh
+	# 	rust-root-task-demo bash /work/build-scripts/master-build.sh
 
 sel4-test:
 	@-docker images|grep none|awk '{print $3 }'|xargs docker rmi > /dev/null 2>&1
