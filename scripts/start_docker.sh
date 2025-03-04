@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 IMAGE_NAME="croakexciting/rel4_dev"
-IMAGE_VERSION="0.0.3"
+IMAGE_VERSION="0.0.4"
 CONTAINER_NAME="rel4_dev"
 CURR_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
