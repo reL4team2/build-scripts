@@ -69,6 +69,8 @@ function main() {
   fi
   setup_user_account_if_not_exist "$@"
   chown -R "${uid}:${gid}" /workspace
+  mkdir -p /opt/seL4
+  chown -R "${uid}:${gid}" /opt/seL4
   setup_rust_mirror
 }
 
