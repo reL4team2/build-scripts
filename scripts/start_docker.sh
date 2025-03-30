@@ -56,6 +56,7 @@ function main() {
         /bin/bash
     
     docker exec -u root ${CONTAINER_NAME} bash '/usr/local/bin/docker_start_user.sh'
+    docker exec -u ${user} ${CONTAINER_NAME} cargo install --force --git https://github.com/reL4team2/reL4-cli.git
 }
 
 main "$@"
