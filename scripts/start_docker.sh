@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 IMAGE_NAME="croakexciting/rel4_dev"
-IMAGE_VERSION="0.0.4"
+IMAGE_VERSION="0.0.6"
 CONTAINER_NAME="rel4_dev"
 CURR_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
@@ -47,12 +47,11 @@ function main() {
         -e DOCKER_USER_ID="${uid}" \
         -e DOCKER_GRP="${group}" \
         -e DOCKER_GRP_ID="${gid}" \
-        -e HTTP_PROXY=http://127.0.0.1:7890 \
-        -e HTTPS_PROXY=http://127.0.0.1:7890 \
         -v $workspace:/workspace \
         -w /workspace \
         --hostname rel4_dev_env \
         --network host \
+        --privileged \
         ${IMAGE_NAME}:${IMAGE_VERSION} \
         /bin/bash
     

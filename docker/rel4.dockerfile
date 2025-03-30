@@ -40,15 +40,15 @@ RUN apt-get update && \
     gperf libtool patchutils bc zlib1g-dev libexpat-dev pkg-config libglib2.0-dev libpixman-1-dev \
     libsdl2-dev libslirp-dev tmux python3 python3-pip ninja-build wget libcapstone-dev
 
-RUN pip install --user setuptools sel4-deps aenum pyelftools grpcio_tools pygments
+RUN pip install setuptools sel4-deps aenum pyelftools grpcio_tools pygments capstone lief
 
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
     PATH=/usr/local/cargo/bin:/usr/local/bin/riscv/bin:$PATH \
     RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static \
     RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup \
-    REL4_PREFIX=/opt/seL4 \
-    SEL4_PREFIX=/opt/seL4
+    REL4_PREFIX=/workspace/.seL4 \
+    SEL4_PREFIX=/workspace/.seL4
 
 RUN curl -L -O https://github.com/yfblock/rel4-docker/releases/download/toolchain/riscv.tar.gz && \
     tar xzvf riscv.tar.gz -C /usr/local/bin && \
@@ -71,3 +71,17 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y --
     --target aarch64-unknown-none \
     --target riscv64imac-unknown-none-elf
 
+RUN rustup install nightly-2024-02-01 && \
+    rustup target add aarch64-unknown-none-softfloat --toolchain nightly-2024-02-01 && \
+    rustup target add aarch64-unknown-none --toolchain nightly-2024-02-01 && \
+    rustup target add riscv64imac-unknown-none-elf --toolchain nightly-2024-02-01
+
+RUN curl -L -O https://musl.cc/aarch64-linux-musl-cross.tgz && \
+    tar xzvf aarch64-linux-musl-cross.tgz -C /opt && \
+    rm aarch64-linux-musl-cross.tgz
+
+ENV PATH=/opt/aarch64-linux-musl-cross/bin:/workspace/.seL4/bin:$PATH
+
+RUN apt -y install gcc-riscv64-unknown-elf
+
+RUN cargo install --force --git https://github.com/reL4team2/reL4-cli.git

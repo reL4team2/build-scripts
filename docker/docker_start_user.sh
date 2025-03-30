@@ -19,7 +19,6 @@ function setup_user_bashrc() {
   local gid="$2"
   local user_home="/home/$3"
   cp -rf /etc/skel/.{profile,bash*} "${user_home}"
-  cp -rf /root/.local  "${user_home}"/
   cp /root/.bashrc "${user_home}"/
   # Set user files ownership to current user, such as .bashrc, .profile, etc.
   echo "setup permission"
@@ -27,6 +26,8 @@ function setup_user_bashrc() {
   chown -R "${uid}:${gid}" "/usr/local/rustup"
   chown -R "${uid}:${gid}" "/usr/local/cargo"
   sed -i 's|#force_color_prompt=yes|force_color_prompt=yes|' /"${user_home}"/.bashrc
+  echo "umask 0000" >> ${user_home}/.bashrc
+
   echo "${uid}:${gid}"
 }
 
@@ -69,9 +70,8 @@ function main() {
   fi
   setup_user_account_if_not_exist "$@"
   chown -R "${uid}:${gid}" /workspace
-  mkdir -p /opt/seL4
-  chown -R "${uid}:${gid}" /opt/seL4
   setup_rust_mirror
+  # cargo install --force --git https://github.com/reL4team2/reL4-cli.git
 }
 
 main "${DOCKER_USER}" "${DOCKER_USER_ID}" "${DOCKER_GRP}" "${DOCKER_GRP_ID}"
