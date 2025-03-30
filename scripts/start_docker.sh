@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 IMAGE_NAME="croakexciting/rel4_dev"
-IMAGE_VERSION="0.0.4"
+IMAGE_VERSION="0.0.6"
 CONTAINER_NAME="rel4_dev"
 CURR_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
@@ -51,6 +51,7 @@ function main() {
         -w /workspace \
         --hostname rel4_dev_env \
         --network host \
+        --privileged \
         ${IMAGE_NAME}:${IMAGE_VERSION} \
         /bin/bash
     
