@@ -18,3 +18,16 @@ make ARCH=riscv64 root-task-demo
 ```
 
 Enjoy it 😆!
+
+
+### ReL4 Dev Docker build
+
+```shell
+bash scripts/build_docker.sh
+```
+
+### ReL4 Dev Create container
+
+```shell
+bash scripts/start_docker.sh
+```
