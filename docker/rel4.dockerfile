@@ -1,6 +1,6 @@
 FROM ubuntu:22.04 AS build_qemu
 
-ARG QEMU_VERSION=8.2.5
+ARG QEMU_VERSION=10.0.0
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y git build-essential gdb-multiarch qemu-system-misc \
@@ -8,19 +8,22 @@ RUN apt-get update && \
     libmpc-dev libmpfr-dev libgmp-dev gawk build-essential bison flex texinfo gperf libtool patchutils bc \
     zlib1g-dev libexpat-dev pkg-config libglib2.0-dev libpixman-1-dev libsdl2-dev libslirp-dev tmux python3 \
     python3-pip ninja-build wget python3-venv python3-dev libclang-dev python3-pexpect bash-completion \
-    qemu-utils qemu-system-arm qemu-efi-aarch64 ipxe-qemu cmake libcapstone-dev
+    qemu-utils qemu-system-arm qemu-efi-aarch64 ipxe-qemu cmake libcapstone-dev wget make python3 xz-utils \
+    python3-venv ninja-build bzip2 meson pkg-config libglib2.0-dev git libslirp-dev libclang-dev
+
+RUN pip install tomli
 
 RUN wget https://download.qemu.org/qemu-${QEMU_VERSION}.tar.xz && \
     tar xf qemu-${QEMU_VERSION}.tar.xz && \
     cd qemu-${QEMU_VERSION} && \ 
-    ./configure --target-list=riscv64-softmmu,riscv64-linux-user --enable-capstone && \
+    ./configure --target-list=riscv64-softmmu,riscv64-linux-user --enable-capstone --enable-slirp && \
     make -j$(nproc) && \
     make install
 
 RUN rm -rf qemu-${QEMU_VERSION} && \
     tar xf qemu-${QEMU_VERSION}.tar.xz && \
     cd qemu-${QEMU_VERSION} && \ 
-    ./configure --target-list=aarch64-softmmu,aarch64-linux-user --enable-capstone && \
+    ./configure --target-list=aarch64-softmmu,aarch64-linux-user --enable-capstone --enable-slirp && \
     make -j$(nproc) && \
     make install
 
