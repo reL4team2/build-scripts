@@ -1,6 +1,6 @@
 FROM ubuntu:22.04 AS build_qemu
 
-ARG QEMU_VERSION=10.0.0
+ARG QEMU_VERSION=9.2.3
 
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y git build-essential gdb-multiarch qemu-system-misc \
@@ -11,7 +11,7 @@ RUN apt-get update && \
     qemu-utils qemu-system-arm qemu-efi-aarch64 ipxe-qemu cmake libcapstone-dev wget make python3 xz-utils \
     python3-venv ninja-build bzip2 meson pkg-config libglib2.0-dev git libslirp-dev libclang-dev
 
-RUN pip install tomli
+RUN pip install tomli fdt sphinx pyyaml ply lxml
 
 RUN wget https://download.qemu.org/qemu-${QEMU_VERSION}.tar.xz && \
     tar xf qemu-${QEMU_VERSION}.tar.xz && \
