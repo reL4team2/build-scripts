@@ -48,8 +48,8 @@ RUN pip install setuptools sel4-deps aenum pyelftools grpcio_tools pygments caps
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
     PATH=/usr/local/cargo/bin:/usr/local/bin/riscv/bin:$PATH \
-    RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static \
-    RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup \
+    # RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static \
+    # RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup \
     REL4_PREFIX=/workspace/.seL4 \
     SEL4_PREFIX=/workspace/.seL4
 

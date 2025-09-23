@@ -70,7 +70,7 @@ function main() {
   fi
   setup_user_account_if_not_exist "$@"
   chown -R "${uid}:${gid}" /workspace
-  setup_rust_mirror
+  # setup_rust_mirror
   # cargo install --force --git https://github.com/reL4team2/reL4-cli.git
 }
 
