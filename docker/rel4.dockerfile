@@ -79,7 +79,7 @@ RUN rustup install nightly-2024-02-01 && \
     rustup target add aarch64-unknown-none --toolchain nightly-2024-02-01 && \
     rustup target add riscv64imac-unknown-none-elf --toolchain nightly-2024-02-01
 
-RUN curl -L -O https://musl.cc/aarch64-linux-musl-cross.tgz && \
+RUN curl -L -O https://github.com/troglobit/misc/releases/download/11-20211120/aarch64-linux-musl-cross.tgz && \
     tar xzvf aarch64-linux-musl-cross.tgz -C /opt && \
     rm aarch64-linux-musl-cross.tgz
 
