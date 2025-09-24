@@ -1,8 +1,8 @@
 #! /usr/bin/env bash
 
 IMAGE_NAME="croakexciting/rel4_dev"
-IMAGE_VERSION="0.0.9"
-CONTAINER_NAME="rel4_dev"
+IMAGE_VERSION="no_mirror"
+CONTAINER_NAME="rel4_dev_test"
 CURR_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
 
 function remove_container_if_exists() {
