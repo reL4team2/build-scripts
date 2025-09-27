@@ -11,7 +11,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
       packages: write
 
     steps:
@@ -27,5 +27,5 @@ jobs:
       with:
         context: ./docker
         file: docker/rel4.dockerfile
-        tags: ghcr.io/croakexciting/rel4_dev:${{ github.ref_name }}
+        tags: ghcr.io/rel4team2/rel4_dev:${{ github.ref_name }}
         push: true
